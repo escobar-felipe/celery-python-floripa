@@ -17,7 +17,7 @@ Este é um projeto que demonstra como integrar uma aplicação Python com **Cele
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Configuração e Execução](#configuração-e-execução)
   - [1. Clonar o repositório](#1-clonar-o-repositório)
-  - [2. Configurar variáveis de ambiente (opcional)](#2-configurar-variáveis-de-ambiente-opcional)
+  - [2. Configurar variáveis de ambiente](#2-configurar-variáveis-de-ambiente-opcional)
   - [3. Construir e executar os contêineres](#3-construir-e-executar-os-contêineres)
   - [4. Acessar a aplicação](#4-acessar-a-aplicação)
   - [5. Testar a aplicação](#5-testar-a-aplicação)

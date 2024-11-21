@@ -100,15 +100,13 @@ Resposta esperada:
 
 Isso enviará uma tarefa para o Celery somar 10 + 20 de forma assíncrona.
 
-Para verificar o resultado da tarefa, você precisará implementar um endpoint ou método para consultar o estado da tarefa usando o `task_id` retornado.
+Para verificar o resultado da tarefa, execute o comando passando o task_id.
 
 Exemplo:
 
 ```bash
 curl http://localhost:8000/result/{task_id}
 ```
-
-**Nota**: A implementação deste endpoint não está inclusa por padrão. Você pode adicioná-la conforme necessário.
 
 ## Como Funciona
 

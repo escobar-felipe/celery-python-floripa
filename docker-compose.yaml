@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  api:
+    restart: always
+    container_name: api-celery
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: uvicorn --host 0.0.0.0 --port 8000 --workers 2 app.main:app
+    ports:
+      - "8000:8000"
+
+  worker:
+    restart: always
+    container_name: worker
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: celery --app=app.celery_app worker -l INFO
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+      - redis
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  redis:
+    image: bitnami/redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes

@@ -13,7 +13,6 @@ services:
 
   worker:
     restart: always
-    container_name: worker
     build:
       context: ./
       dockerfile: Dockerfile
@@ -38,3 +37,20 @@ services:
       - "6379:6379"
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+
+
+  flower:
+    restart: always
+    container_name: flower
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "5555:5555"
+    command: celery --app=app.celery_app flower -l INFO
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+      - redis
+        

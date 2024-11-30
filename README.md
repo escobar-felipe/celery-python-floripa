@@ -60,6 +60,10 @@ Crie um arquivo `.env` na raiz do projeto e defina as variáveis:
 ```bash
 CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
 CELERY_RESULT_BACKEND=redis://redis:6379/
+FLOWER_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+FLOWER_PORT=5555
+FLOWER_USER=admin
+FLOWER_PASSWORD=admin123
 ```
 
 ### 3. Construir e executar os contêineres

@@ -1,5 +1,5 @@
-from multiprocessing.pool import AsyncResult
 from app.celery_app import celery_app
+from celery.result import AsyncResult
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -43,21 +43,17 @@ def enqueue_add(request: AddRequest):
 def get_result(task_id: str):
     result = AsyncResult(task_id, app=celery_app)
     if result.state == "PENDING":
-        # Tarefa ainda não foi executada
         return {"task_id": task_id, "status": result.state, "result": None}
     elif result.state == "SUCCESS":
-        # Tarefa concluída com sucesso
         return {"task_id": task_id, "status": result.state, "result": result.result}
     elif result.state == "FAILURE":
-        # Tarefa falhou
         return {
             "task_id": task_id,
             "status": result.state,
-            "result": str(result.result),  # Detalhes do erro
-            "traceback": result.traceback,  # Stack trace
+            "result": str(result.result),
+            "traceback": result.traceback,
         }
     else:
-        # Outros estados: STARTED, RETRY, REVOKED
         return {"task_id": task_id, "status": result.state, "result": None}
 
 
